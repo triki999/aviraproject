@@ -1,0 +1,36 @@
+PODS:
+  - Alamofire (4.4.0)
+  - Argo (4.1.2):
+    - Runes (>= 4.0.0)
+  - Curry (3.0.0)
+  - ReactiveAlamofire (2.0.0):
+    - Alamofire (~> 4.0)
+    - ReactiveSwift (~> 1.0)
+  - ReactiveCocoa (5.0.3):
+    - ReactiveSwift (~> 1.1)
+  - ReactiveSwift (1.1.3):
+    - Result (~> 3.2)
+  - Result (3.2.2)
+  - Runes (4.0.1)
+
+DEPENDENCIES:
+  - Alamofire
+  - Argo
+  - Curry
+  - ReactiveAlamofire
+  - ReactiveCocoa
+  - ReactiveSwift
+
+SPEC CHECKSUMS:
+  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
+  Argo: 5db06502fc1222d83011f574243089dab25202ff
+  Curry: eb3d2c75aec678b3cc7fb2729d2ad6dd121531d1
+  ReactiveAlamofire: 58f385f648b07db4267ae8898a8212f3d74c9c7f
+  ReactiveCocoa: 066a855f613fb72f68258771095805fdb10312d2
+  ReactiveSwift: f54ba12c2e799003432930fa55495315ae44f32b
+  Result: 4edd39003fdccf281d418ee1b006571f70123250
+  Runes: ff20f163b478ac2c0e18158d6086fd5b1997f983
+
+PODFILE CHECKSUM: 0b63fb9da1b3c357a8be70de8cb7ada51c714b6d
+
+COCOAPODS: 1.2.1

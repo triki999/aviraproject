@@ -8,4 +8,5 @@ target 'AviraProject' do
   pod 'Curry'
   pod 'ReactiveCocoa'
   pod 'Alamofire'
+  pod 'ReactiveAlamofire'
 end

@@ -7,14 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		756B31321F6D1156001703FB /* MainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756B31311F6D1156001703FB /* MainService.swift */; };
+		756B31351F6D290A001703FB /* GeneralVos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756B31341F6D290A001703FB /* GeneralVos.swift */; };
+		756B31381F6D293F001703FB /* WebErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756B31371F6D293F001703FB /* WebErrors.swift */; };
 		7593B5D21F6D0B0B0032DAA2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7593B5D11F6D0B0B0032DAA2 /* AppDelegate.swift */; };
 		7593B5D41F6D0B0B0032DAA2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7593B5D31F6D0B0B0032DAA2 /* ViewController.swift */; };
 		7593B5D71F6D0B0B0032DAA2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7593B5D51F6D0B0B0032DAA2 /* Main.storyboard */; };
 		7593B5D91F6D0B0B0032DAA2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7593B5D81F6D0B0B0032DAA2 /* Assets.xcassets */; };
 		7593B5DC1F6D0B0B0032DAA2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7593B5DA1F6D0B0B0032DAA2 /* LaunchScreen.storyboard */; };
+		D3E1D7BC1FA4C526C9A5371D /* Pods_AviraProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35BB9323BDEF0FB773F57EF0 /* Pods_AviraProject.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1C62913AFE52F5F8A5C5E0D4 /* Pods-AviraProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AviraProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AviraProject/Pods-AviraProject.debug.xcconfig"; sourceTree = "<group>"; };
+		35BB9323BDEF0FB773F57EF0 /* Pods_AviraProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AviraProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		60FCA9414BEBE24FF98436B4 /* Pods-AviraProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AviraProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-AviraProject/Pods-AviraProject.release.xcconfig"; sourceTree = "<group>"; };
+		756B31311F6D1156001703FB /* MainService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainService.swift; sourceTree = "<group>"; };
+		756B31341F6D290A001703FB /* GeneralVos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralVos.swift; sourceTree = "<group>"; };
+		756B31371F6D293F001703FB /* WebErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebErrors.swift; sourceTree = "<group>"; };
 		7593B5CE1F6D0B0B0032DAA2 /* AviraProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AviraProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7593B5D11F6D0B0B0032DAA2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7593B5D31F6D0B0B0032DAA2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -29,17 +39,73 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3E1D7BC1FA4C526C9A5371D /* Pods_AviraProject.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		756B312C1F6D0FC8001703FB /* modelviews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = modelviews;
+			sourceTree = "<group>";
+		};
+		756B312D1F6D0FDB001703FB /* models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = models;
+			sourceTree = "<group>";
+		};
+		756B312E1F6D0FEE001703FB /* viewcontrollers */ = {
+			isa = PBXGroup;
+			children = (
+				7593B5D31F6D0B0B0032DAA2 /* ViewController.swift */,
+			);
+			name = viewcontrollers;
+			sourceTree = "<group>";
+		};
+		756B312F1F6D0FFC001703FB /* utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = utils;
+			sourceTree = "<group>";
+		};
+		756B31301F6D1128001703FB /* services */ = {
+			isa = PBXGroup;
+			children = (
+				756B31311F6D1156001703FB /* MainService.swift */,
+			);
+			name = services;
+			sourceTree = "<group>";
+		};
+		756B31331F6D28F2001703FB /* VO */ = {
+			isa = PBXGroup;
+			children = (
+				756B31341F6D290A001703FB /* GeneralVos.swift */,
+			);
+			name = VO;
+			sourceTree = "<group>";
+		};
+		756B31361F6D292E001703FB /* errors */ = {
+			isa = PBXGroup;
+			children = (
+				756B31371F6D293F001703FB /* WebErrors.swift */,
+			);
+			name = errors;
+			sourceTree = "<group>";
+		};
 		7593B5C51F6D0B0B0032DAA2 = {
 			isa = PBXGroup;
 			children = (
 				7593B5D01F6D0B0B0032DAA2 /* AviraProject */,
 				7593B5CF1F6D0B0B0032DAA2 /* Products */,
+				BB77F2B75C0179CDADE26E83 /* Pods */,
+				9FA43F90705E1D1B4EF267F6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +120,37 @@
 		7593B5D01F6D0B0B0032DAA2 /* AviraProject */ = {
 			isa = PBXGroup;
 			children = (
+				756B31361F6D292E001703FB /* errors */,
+				756B31331F6D28F2001703FB /* VO */,
+				756B31301F6D1128001703FB /* services */,
+				756B312F1F6D0FFC001703FB /* utils */,
+				756B312E1F6D0FEE001703FB /* viewcontrollers */,
+				756B312D1F6D0FDB001703FB /* models */,
+				756B312C1F6D0FC8001703FB /* modelviews */,
 				7593B5D11F6D0B0B0032DAA2 /* AppDelegate.swift */,
-				7593B5D31F6D0B0B0032DAA2 /* ViewController.swift */,
 				7593B5D51F6D0B0B0032DAA2 /* Main.storyboard */,
 				7593B5D81F6D0B0B0032DAA2 /* Assets.xcassets */,
 				7593B5DA1F6D0B0B0032DAA2 /* LaunchScreen.storyboard */,
 				7593B5DD1F6D0B0B0032DAA2 /* Info.plist */,
 			);
 			path = AviraProject;
+			sourceTree = "<group>";
+		};
+		9FA43F90705E1D1B4EF267F6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				35BB9323BDEF0FB773F57EF0 /* Pods_AviraProject.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BB77F2B75C0179CDADE26E83 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1C62913AFE52F5F8A5C5E0D4 /* Pods-AviraProject.debug.xcconfig */,
+				60FCA9414BEBE24FF98436B4 /* Pods-AviraProject.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +160,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7593B5E01F6D0B0B0032DAA2 /* Build configuration list for PBXNativeTarget "AviraProject" */;
 			buildPhases = (
+				8B1CE400E49BD2CBB2FBB3ED /* [CP] Check Pods Manifest.lock */,
 				7593B5CA1F6D0B0B0032DAA2 /* Sources */,
 				7593B5CB1F6D0B0B0032DAA2 /* Frameworks */,
 				7593B5CC1F6D0B0B0032DAA2 /* Resources */,
+				A145F284AF13600D1EB6386E /* [CP] Embed Pods Frameworks */,
+				3D2BBDEAFCE2CB94B208FE88 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -132,13 +224,64 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3D2BBDEAFCE2CB94B208FE88 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AviraProject/Pods-AviraProject-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8B1CE400E49BD2CBB2FBB3ED /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A145F284AF13600D1EB6386E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AviraProject/Pods-AviraProject-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		7593B5CA1F6D0B0B0032DAA2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				756B31381F6D293F001703FB /* WebErrors.swift in Sources */,
 				7593B5D41F6D0B0B0032DAA2 /* ViewController.swift in Sources */,
+				756B31351F6D290A001703FB /* GeneralVos.swift in Sources */,
 				7593B5D21F6D0B0B0032DAA2 /* AppDelegate.swift in Sources */,
+				756B31321F6D1156001703FB /* MainService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +404,7 @@
 		};
 		7593B5E11F6D0B0B0032DAA2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1C62913AFE52F5F8A5C5E0D4 /* Pods-AviraProject.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 49V2EC9HN4;
@@ -274,6 +418,7 @@
 		};
 		7593B5E21F6D0B0B0032DAA2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 60FCA9414BEBE24FF98436B4 /* Pods-AviraProject.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 49V2EC9HN4;
@@ -304,6 +449,7 @@
 				7593B5E21F6D0B0B0032DAA2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
