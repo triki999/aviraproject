@@ -59,7 +59,14 @@ class StorieModel
         return returnSignal;
     }
     
-    
+    public func changeStoryStatus(_ dbStory:DBStory,state:DBStory.StoryState) -> DBStory.StoryState
+    {
+        dbStory.update {
+            dbStory.state = state
+        }
+        
+        return dbStory.state
+    }
     
     
     public func clearModel()

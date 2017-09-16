@@ -69,7 +69,13 @@ class StoriesListViewController: UIViewController, UITableViewDelegate, UITableV
             .take(until: interuptSignal)
             .take(during: self.reactive.lifetime).doNext {[weak self] (dbStory) in
                 print(dbStory)
-            
+                
+                guard let controller = self?.storyboard?.instantiateViewController(withIdentifier: "StoryWebviewController") as? StoryWebviewController else {
+                    return
+                }
+                controller.dbStoryData = dbStory;
+                
+                self?.navigationController?.pushViewController(controller, animated: true)
             
             }.startWithCompleted {
                 
