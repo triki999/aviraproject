@@ -10,6 +10,8 @@
 		756B31321F6D1156001703FB /* MainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756B31311F6D1156001703FB /* MainService.swift */; };
 		756B31351F6D290A001703FB /* GeneralVos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756B31341F6D290A001703FB /* GeneralVos.swift */; };
 		756B31381F6D293F001703FB /* WebErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756B31371F6D293F001703FB /* WebErrors.swift */; };
+		756B313A1F6D2DB0001703FB /* StoriesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756B31391F6D2DB0001703FB /* StoriesModel.swift */; };
+		756B313C1F6D3131001703FB /* HelperServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756B313B1F6D3131001703FB /* HelperServices.swift */; };
 		7593B5D21F6D0B0B0032DAA2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7593B5D11F6D0B0B0032DAA2 /* AppDelegate.swift */; };
 		7593B5D41F6D0B0B0032DAA2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7593B5D31F6D0B0B0032DAA2 /* ViewController.swift */; };
 		7593B5D71F6D0B0B0032DAA2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7593B5D51F6D0B0B0032DAA2 /* Main.storyboard */; };
@@ -25,6 +27,8 @@
 		756B31311F6D1156001703FB /* MainService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainService.swift; sourceTree = "<group>"; };
 		756B31341F6D290A001703FB /* GeneralVos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralVos.swift; sourceTree = "<group>"; };
 		756B31371F6D293F001703FB /* WebErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebErrors.swift; sourceTree = "<group>"; };
+		756B31391F6D2DB0001703FB /* StoriesModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoriesModel.swift; sourceTree = "<group>"; };
+		756B313B1F6D3131001703FB /* HelperServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperServices.swift; sourceTree = "<group>"; };
 		7593B5CE1F6D0B0B0032DAA2 /* AviraProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AviraProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7593B5D11F6D0B0B0032DAA2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7593B5D31F6D0B0B0032DAA2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -56,6 +60,7 @@
 		756B312D1F6D0FDB001703FB /* models */ = {
 			isa = PBXGroup;
 			children = (
+				756B31391F6D2DB0001703FB /* StoriesModel.swift */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -79,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				756B31311F6D1156001703FB /* MainService.swift */,
+				756B313B1F6D3131001703FB /* HelperServices.swift */,
 			);
 			name = services;
 			sourceTree = "<group>";
@@ -278,6 +284,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				756B31381F6D293F001703FB /* WebErrors.swift in Sources */,
+				756B313C1F6D3131001703FB /* HelperServices.swift in Sources */,
+				756B313A1F6D2DB0001703FB /* StoriesModel.swift in Sources */,
 				7593B5D41F6D0B0B0032DAA2 /* ViewController.swift in Sources */,
 				756B31351F6D290A001703FB /* GeneralVos.swift in Sources */,
 				7593B5D21F6D0B0B0032DAA2 /* AppDelegate.swift in Sources */,

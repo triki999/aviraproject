@@ -20,7 +20,7 @@ import Argo
 class MainService{
     
 
-    public func get<U:Decodable>(url:String) -> SignalProducer<U, WebErrors> where U == U.DecodedType
+    public static func get<U:Decodable>(url:String) -> SignalProducer<U, WebErrors> where U == U.DecodedType
     {
         let callSignalProducer = Alamofire.request(url).responseProducer().flatMapError { (resultError) -> SignalProducer<ResponseProducerResult, WebErrors> in
             return SignalProducer(error: WebErrors.AlamoError);
@@ -35,17 +35,17 @@ class MainService{
                 let response = U.decode(JSON(json))
                 
                 switch response{
-                case .failure(let _):
+                case .failure(let error):
+                    print(error)
                     return SignalProducer(error: WebErrors.AlamoError);
-                    
-                    
+  
                 case .success(let value):
                     return SignalProducer(value:value);
                     
                 }
         }
         
-        return callSignalProducer;
+        return callSignalProducer.observe(on: UIScheduler());
         
     }
 }

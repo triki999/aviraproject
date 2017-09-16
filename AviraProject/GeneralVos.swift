@@ -11,7 +11,7 @@ import Argo
 import Runes
 import Curry
 
-struct StorieList
+struct StoriesList
 {
 //    [
 //    15263460
@@ -23,9 +23,9 @@ struct StorieList
 }
 
 
-extension StorieList : Decodable
+extension StoriesList : Decodable
 {
-    static func decode(_ json: JSON) -> Decoded<StorieList>
+    static func decode(_ json: JSON) -> Decoded<StoriesList>
     {
         
         let val = [Int].decode(json)
@@ -34,7 +34,7 @@ extension StorieList : Decodable
             return Decoded.failure(err)
             
         case .success(let val):
-            return Decoded.success(StorieList(ids: val))
+            return Decoded.success(StoriesList(ids: val))
         }
         
     }
@@ -42,18 +42,14 @@ extension StorieList : Decodable
 
 
 
-struct Storie
+struct Story
 {
-    let by: String;
-    let descendants: Int;
-    let id: Int;
-    let score: String;
-    let time: Int;
-    let title: String;
-    let type: String;
-    let url: String;
+    let id: Int?;
+    let time: Int?;
+    let title: String?;
+    let url: String?;
     
-    
+  
     
     //    by: "rl3"
     //    descendants: 0
@@ -66,20 +62,17 @@ struct Storie
 }
 
 
-extension Storie : Decodable
+extension Story : Decodable
 {
-    public static func decode(_ json: JSON) -> Decoded<Storie>
+    public static func decode(_ json: JSON) -> Decoded<Story>
     {
         
-        return curry(Storie.init)
-            <^> json <| "by"
-            <*> json <| "descendants"
-            <*> json <| "id"
-            <*> json <| "score"
-            <*> json <| "time"
-            <*> json <| "title"
-            <*> json <| "type"
-            <*> json <| "url"
+        let val = curry(Story.init)
+            <^> json <|? "id"
+            <*> json <|? "time"
+            <*> json <|? "title"
+            <*> json <|? "url"
         
+        return val;
     }
 }
