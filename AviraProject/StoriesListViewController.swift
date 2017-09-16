@@ -24,6 +24,8 @@ class StoriesListViewController: UIViewController, UITableViewDelegate, UITableV
     
     let modelview = StoriesListViewModel()
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var btnNewAndTopStories: UIButton!
+    @IBOutlet weak var btnSaveForLater: UIButton!
     
     
     override func viewDidLoad() {
@@ -41,6 +43,20 @@ class StoriesListViewController: UIViewController, UITableViewDelegate, UITableV
             .doNext {[weak self] (_) in
                 self?.tableView.reloadData()
             }.startWithCompleted {
+                
+        }
+        
+        
+        btnSaveForLater.reactive.controlEvents(.touchUpInside)
+            .take(during: self.reactive.lifetime).doNext {[weak self] (_) in
+                //goto ReadLater
+                guard let controller = self?.storyboard?.instantiateViewController(withIdentifier: "ReadLaterViewController") as? ReadLaterViewController else {
+                    return;
+                }
+                
+                self?.navigationController?.pushViewController(controller, animated: true)
+                
+            }.observeCompleted {
                 
         }
         

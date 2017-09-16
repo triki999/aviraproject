@@ -29,7 +29,13 @@ class StoryWebviewController : UIViewController
         }
         
         navigationItem.title = dbStoryData.title
+        lbURL.text = dbStoryData.url
         
+        if let urlString = dbStoryData.url, let url = URL(string: urlString)
+        {
+            let request = URLRequest(url: url)
+            webView.loadRequest(request)
+        }
         
     }
     

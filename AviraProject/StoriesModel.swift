@@ -9,6 +9,7 @@
 import Foundation
 import ReactiveSwift
 import RealmSwift
+import Result
 
 class StorieModel
 {
@@ -32,6 +33,28 @@ class StorieModel
         getAllStoriesIDS().startWithCompleted {[weak self] in
 
         }
+        
+    }
+    
+    public func getAllReadLaterStories() -> SignalProducer<[DBStory],NoError>
+    {
+        
+        let signal = SignalProducer<[DBStory],NoError>{ (observer, disposable) in
+            let realm = try! Realm()
+            let query = "stateRaw == \(DBStory.StoryState.readLater.rawValue)"
+            
+            let _dbStory = realm.objects(DBStory.self).filter(query)
+            var array:[DBStory] = []
+            for stor in _dbStory{
+                array.append(stor)
+            }
+            observer.send(value: array)
+            observer.sendCompleted()
+           
+        }.observe(on: UIScheduler())
+        
+        return signal;
+        
         
     }
     
