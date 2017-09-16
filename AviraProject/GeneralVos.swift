@@ -45,7 +45,7 @@ extension StoriesList : Decodable
 struct Story
 {
     let id: Int;
-    let time: Int?;
+    let time: Double?;
     let title: String?;
     let url: String?;
     

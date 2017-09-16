@@ -49,7 +49,7 @@ public class DBStory : RealmUpdater
     
     dynamic var id = -1;
     dynamic var stateRaw = 1
-    var time = RealmOptional<Int>();
+    var time = RealmOptional<Double>();
     dynamic var title: String?;
     dynamic var url: String?;
     var state: DBStory.StoryState {

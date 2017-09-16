@@ -9,7 +9,7 @@
 import UIKit
 import ReactiveSwift
 import ReactiveCocoa
-
+import Result
 
 
 
@@ -50,11 +50,33 @@ class StoriesListViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as! StoryDetailCell
-        cell.setCellIndexPath(indexPath, modelView: modelview)
-        cell.lbTitle.text = "aaa"
+        cell.setCellIndexPath(indexPath, modelView: modelview).startWithCompleted {
+            
+        }
         
         return cell;
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let interuptSignal = self.reactive.signal(for: #selector(UITableViewDelegate.tableView(_:didSelectRowAt:)))
+            .flatMap(.latest) { (_) -> SignalProducer<(),NoError> in
+            SignalProducer.empty;
+        }
+        
+
+        modelview.getStorySignal(index: indexPath)
+            .take(until: interuptSignal)
+            .take(during: self.reactive.lifetime).doNext {[weak self] (dbStory) in
+                print(dbStory)
+            
+            
+            }.startWithCompleted {
+                
+        }
+    }
+    
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
@@ -77,7 +99,6 @@ class StoriesListViewController: UIViewController, UITableViewDelegate, UITableV
             return nil
         }
         
-        let view = UIView()
         
         let headerCell = tableView.dequeueReusableCell(withIdentifier: headerIdentifier) as! StoryCellHeader
         if section == 0{
@@ -85,9 +106,9 @@ class StoriesListViewController: UIViewController, UITableViewDelegate, UITableV
         }else{
             headerCell.lbTitle.text = "Top Stories"
         }
-        view.addSubview(headerCell)
         
-        return view
+        
+        return headerCell
         
         
     }

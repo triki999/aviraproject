@@ -39,9 +39,9 @@ class StoriesListViewModel : NSObject
     private func getStoryIdFromIndexPath(_ index:IndexPath) -> Int?
     {
         if index.section == 0{
-            return topStoriesListIDS?.ids[index.row]
+            return newStoriesListIDS?.ids[index.row]
         }
-        return newStoriesListIDS?.ids[index.row]
+        return topStoriesListIDS?.ids[index.row]
     }
     
     func getStorySignal(index:IndexPath) ->SignalProducer<DBStory, WebErrors>
