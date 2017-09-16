@@ -19,60 +19,155 @@ class StorieModel
     
     public static let  instance:StorieModel = StorieModel()
     
-    var topStoriesList:[Story]?
-    var newStoriesList:[Story]?
-
+    var topStoriesList:[DBStory]?
+    var newStoriesList:[DBStory]?
+    
+    var topStoriesListIDS:StoriesList?
+    var newStoriesListIDS:StoriesList?
+    
     private init()
     {
         
+        //getAllStories
+        getAllStoriesIDS().startWithCompleted {[weak self] in
+
+        }
+        
     }
+    
+    
+    public func getStorySignal(storyId:Int) -> SignalProducer<DBStory, WebErrors>
+    {
+        
+        
+        let realm = try! Realm()
+        let query = "id == \(storyId)"
+        
+        if let _dbStory = realm.objects(DBStory.self).filter(query).first
+        {
+            return SignalProducer(value: _dbStory)
+        }
+        
+        
+        let returnSignal = HelperServices.getStoryDetails(storyId: storyId).flatMap(.latest) {[weak self] (story) -> SignalProducer<DBStory, WebErrors> in
+            guard let dbStory = self?.createDBStoryEntry(story: story) else {
+                return SignalProducer.empty
+            }
+            return SignalProducer(value: dbStory)
+        }.observe(on: UIScheduler())
+        
+        return returnSignal;
+    }
+    
+    
     
     
     public func clearModel()
     {
         topStoriesList = nil;
         newStoriesList = nil;
+        
+        topStoriesListIDS = nil;
+        newStoriesListIDS = nil;
     }
     
-    public func getAllStories() -> SignalProducer<([Story],[Story]),WebErrors>
-    {
     
+    public func getAllStoriesIDS() -> SignalProducer<(StoriesList,StoriesList),WebErrors>
+    {
+        
+        if let _ = topStoriesListIDS, let _ = newStoriesListIDS {
+            return SignalProducer(value:(newStoriesListIDS!,topStoriesListIDS!))
+        }
+        
+        let newStoryListSignal = HelperServices.getNewStories()
+        let topStoryListSignal = HelperServices.getTopStories()
+        
+        
+        let returnSignal = SignalProducer.combineLatest(newStoryListSignal, topStoryListSignal)
+            .flatMap(.latest) {[weak self] (newStories,topStories) -> SignalProducer<(StoriesList,StoriesList),WebErrors> in
+                guard let wSelf = self else {
+                    return SignalProducer.empty
+                }
+                wSelf.topStoriesListIDS = topStories;
+                wSelf.newStoriesListIDS = newStories
+                
+                return SignalProducer(value:(newStories,topStories))
+        }
+        
+        return returnSignal
+        
+    }
+    
+    
+    public func getAllStories() -> SignalProducer<([DBStory],[DBStory]),WebErrors>
+    {
+        
         
         let newStoriesSignal = getStoriesDetailList(type: .new)
         let topStoriesSignal = getStoriesDetailList(type: .top)
         
-        let returnSignal = SignalProducer.combineLatest(newStoriesSignal, topStoriesSignal).doNext {[weak self] (newStories,topStories) in
-            self?.newStoriesList = newStories;
-            self?.topStoriesList = topStories
+        let returnSignal = SignalProducer.combineLatest(newStoriesSignal, topStoriesSignal)
+            .flatMap(.latest) {[weak self] (newStories, topStories) -> SignalProducer<([DBStory],[DBStory]),WebErrors> in
+                guard let wSelf = self else {
+                    return SignalProducer.empty
+                }
+                
+                
+                let newS = wSelf.fillDbWithStories(stories: newStories);
+                let topS = wSelf.fillDbWithStories(stories: topStories);
+                
+                return SignalProducer(value:(newS,topS))
+                
+                
+                
+            }.doNext {[weak self] (newStories,topStories) in
+                self?.newStoriesList =  newStories
+                self?.topStoriesList = topStories;
+                
         }
         
         return returnSignal;
-       
+        
     }
     
-    private func fillDBStoryStatus(stories:[Story])
+    private func fillDbWithStories(stories:[Story]) -> [DBStory]
     {
-        for story in stories
-        {
+        
+        
+        let storyCellsArray = stories.flatMap { (story) -> DBStory? in
             let realm = try! Realm()
-            let query = "where id == \(story.id)"
-            if let _ = realm.objects(DBStory.self).filter(query).first
+            let query = "id == \(story.id)"
+            
+            var dbStory:DBStory!
+            
+            if let _dbStory = realm.objects(DBStory.self).filter(query).first
             {
-                
+                dbStory = _dbStory
             }else{
                 
-                let dbStory = DBStory()
-                dbStory.update {
-                    dbStory.id = story.id;
-                    dbStory.state = .unread
-                }
-                realm.add(dbStory)
-   
+                dbStory = createDBStoryEntry(story: story)
             }
             
-            
-            
+            return dbStory
         }
+        
+        return storyCellsArray;
+        
+    }
+    
+    private func createDBStoryEntry(story:Story) -> DBStory
+    {
+        let dbStory = DBStory()
+        dbStory.update {
+            dbStory.id = story.id;
+            dbStory.state = .unread
+            dbStory.time = RealmOptional(story.time);
+            dbStory.url = story.url
+            dbStory.title = story.title
+        }
+        dbStory.addToRealm()
+        
+        return dbStory;
     }
     
     
@@ -83,17 +178,17 @@ class StorieModel
         
         switch type
         {
-            case .new:
-                storyListSignal = HelperServices.getNewStories()
+        case .new:
+            storyListSignal = HelperServices.getNewStories()
             break;
             
-            case .top:
-                storyListSignal = HelperServices.getTopStories()
+        case .top:
+            storyListSignal = HelperServices.getTopStories()
             break;
         }
         
         
-        let sigg = storyListSignal.flatMap(.latest) { (storiesList) -> SignalProducer<[Story],WebErrors> in
+        let returnSignal = storyListSignal.flatMap(.latest) { (storiesList) -> SignalProducer<[Story],WebErrors> in
             
             let storyDetailsProducers = storiesList.ids.map({ (storyId) -> SignalProducer<Story,WebErrors> in
                 let returnSignal = HelperServices.getStoryDetails(storyId: storyId)
@@ -106,8 +201,8 @@ class StorieModel
             
             return sig.collect()
         }
-
-        return sigg
+        
+        return returnSignal
     }
     
     

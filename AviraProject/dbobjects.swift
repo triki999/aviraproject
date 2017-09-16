@@ -49,6 +49,9 @@ public class DBStory : RealmUpdater
     
     dynamic var id = -1;
     dynamic var stateRaw = 1
+    var time = RealmOptional<Int>();
+    dynamic var title: String?;
+    dynamic var url: String?;
     var state: DBStory.StoryState {
         get {
             if let a = DBStory.StoryState.init(rawValue: stateRaw) {
@@ -60,5 +63,6 @@ public class DBStory : RealmUpdater
             stateRaw = newValue.rawValue
         }
     }
+    
 }
 

@@ -16,6 +16,7 @@
 		756B31421F6D4623001703FB /* StoryDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756B31411F6D4623001703FB /* StoryDetailCell.swift */; };
 		756B31441F6D4DF0001703FB /* StoriesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756B31431F6D4DF0001703FB /* StoriesListViewModel.swift */; };
 		756B31471F6D51B1001703FB /* dbobjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756B31461F6D51B1001703FB /* dbobjects.swift */; };
+		756B31491F6D84BA001703FB /* StoryCellHeade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756B31481F6D84BA001703FB /* StoryCellHeade.swift */; };
 		7593B5D21F6D0B0B0032DAA2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7593B5D11F6D0B0B0032DAA2 /* AppDelegate.swift */; };
 		7593B5D41F6D0B0B0032DAA2 /* StoriesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7593B5D31F6D0B0B0032DAA2 /* StoriesListViewController.swift */; };
 		7593B5D71F6D0B0B0032DAA2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7593B5D51F6D0B0B0032DAA2 /* Main.storyboard */; };
@@ -37,6 +38,7 @@
 		756B31411F6D4623001703FB /* StoryDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryDetailCell.swift; sourceTree = "<group>"; };
 		756B31431F6D4DF0001703FB /* StoriesListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoriesListViewModel.swift; sourceTree = "<group>"; };
 		756B31461F6D51B1001703FB /* dbobjects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dbobjects.swift; sourceTree = "<group>"; };
+		756B31481F6D84BA001703FB /* StoryCellHeade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryCellHeade.swift; sourceTree = "<group>"; };
 		7593B5CE1F6D0B0B0032DAA2 /* AviraProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AviraProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7593B5D11F6D0B0B0032DAA2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7593B5D31F6D0B0B0032DAA2 /* StoriesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesListViewController.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				756B31411F6D4623001703FB /* StoryDetailCell.swift */,
+				756B31481F6D84BA001703FB /* StoryCellHeade.swift */,
 			);
 			name = cells;
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 				756B31421F6D4623001703FB /* StoryDetailCell.swift in Sources */,
 				756B31321F6D1156001703FB /* MainService.swift in Sources */,
 				756B313E1F6D4352001703FB /* utils.swift in Sources */,
+				756B31491F6D84BA001703FB /* StoryCellHeade.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -77,6 +77,44 @@
                                                             <outlet property="lbTitle" destination="5qW-Mo-wx8" id="ZxJ-iv-ADV"/>
                                                         </connections>
                                                     </tableViewCell>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="header" id="jjH-9C-Q8D" customClass="StoryCellHeader" customModule="AviraProject" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="163" width="375" height="135"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jjH-9C-Q8D" id="pCp-1l-DuQ">
+                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="135"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <subviews>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0gl-Qw-aTP">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="134.5"/>
+                                                                    <subviews>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gSK-1M-35A">
+                                                                            <rect key="frame" x="8" y="10.5" width="359" height="114"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                                            <nil key="textColor"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                    </subviews>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    <constraints>
+                                                                        <constraint firstItem="gSK-1M-35A" firstAttribute="centerY" secondItem="0gl-Qw-aTP" secondAttribute="centerY" id="0hp-ok-D5n"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="gSK-1M-35A" secondAttribute="trailing" constant="8" id="1gJ-jZ-0lP"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="gSK-1M-35A" secondAttribute="bottom" constant="10" id="U2t-ye-rFN"/>
+                                                                        <constraint firstItem="gSK-1M-35A" firstAttribute="leading" secondItem="0gl-Qw-aTP" secondAttribute="leading" constant="8" id="olx-Rf-nwb"/>
+                                                                        <constraint firstItem="gSK-1M-35A" firstAttribute="centerX" secondItem="0gl-Qw-aTP" secondAttribute="centerX" id="zmN-3L-CI5"/>
+                                                                    </constraints>
+                                                                </view>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="0gl-Qw-aTP" firstAttribute="top" secondItem="pCp-1l-DuQ" secondAttribute="top" id="0At-pW-2Nu"/>
+                                                                <constraint firstItem="0gl-Qw-aTP" firstAttribute="leading" secondItem="pCp-1l-DuQ" secondAttribute="leading" id="72o-ee-j61"/>
+                                                                <constraint firstAttribute="trailing" secondItem="0gl-Qw-aTP" secondAttribute="trailing" id="I4Z-QX-GyR"/>
+                                                                <constraint firstAttribute="bottom" secondItem="0gl-Qw-aTP" secondAttribute="bottom" id="iY5-bI-5gO"/>
+                                                            </constraints>
+                                                        </tableViewCellContentView>
+                                                        <connections>
+                                                            <outlet property="lbTitle" destination="gSK-1M-35A" id="hLG-TP-8xB"/>
+                                                        </connections>
+                                                    </tableViewCell>
                                                 </prototypes>
                                                 <connections>
                                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="Cfh-yb-6N6"/>
