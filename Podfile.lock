@@ -10,6 +10,11 @@ PODS:
     - ReactiveSwift (~> 1.1)
   - ReactiveSwift (1.1.3):
     - Result (~> 3.2)
+  - Realm (2.7.0):
+    - Realm/Headers (= 2.7.0)
+  - Realm/Headers (2.7.0)
+  - RealmSwift (2.7.0):
+    - Realm (= 2.7.0)
   - Result (3.2.2)
   - Runes (4.0.1)
 
@@ -20,6 +25,7 @@ DEPENDENCIES:
   - ReactiveAlamofire
   - ReactiveCocoa
   - ReactiveSwift
+  - RealmSwift
 
 SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
@@ -28,9 +34,11 @@ SPEC CHECKSUMS:
   ReactiveAlamofire: 58f385f648b07db4267ae8898a8212f3d74c9c7f
   ReactiveCocoa: 066a855f613fb72f68258771095805fdb10312d2
   ReactiveSwift: f54ba12c2e799003432930fa55495315ae44f32b
+  Realm: 07e5d3a9e0e41d65fd5f9f05150ed6295d0f093b
+  RealmSwift: 6d06425d3900c86473c4f323bf6949b43fca22bc
   Result: 4edd39003fdccf281d418ee1b006571f70123250
   Runes: ff20f163b478ac2c0e18158d6086fd5b1997f983
 
-PODFILE CHECKSUM: 0b63fb9da1b3c357a8be70de8cb7ada51c714b6d
+PODFILE CHECKSUM: 87131e891ea85a5d1773c368cf4cc8e990fab931
 
 COCOAPODS: 1.2.1

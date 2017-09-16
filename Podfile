@@ -9,4 +9,5 @@ target 'AviraProject' do
   pod 'ReactiveCocoa'
   pod 'Alamofire'
   pod 'ReactiveAlamofire'
+  pod 'RealmSwift'
 end

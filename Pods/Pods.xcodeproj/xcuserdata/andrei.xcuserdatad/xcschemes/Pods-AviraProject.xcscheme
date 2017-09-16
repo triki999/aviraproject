@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F759D3B5F89CBF2122F8EB979ED19010"
+               BlueprintIdentifier = "E03B84B20DFB1751BBCCB79333F16B60"
                BuildableName = "Pods_AviraProject.framework"
                BlueprintName = "Pods-AviraProject"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F759D3B5F89CBF2122F8EB979ED19010"
+            BlueprintIdentifier = "E03B84B20DFB1751BBCCB79333F16B60"
             BuildableName = "Pods_AviraProject.framework"
             BlueprintName = "Pods-AviraProject"
             ReferencedContainer = "container:Pods.xcodeproj">

@@ -44,7 +44,7 @@ extension StoriesList : Decodable
 
 struct Story
 {
-    let id: Int?;
+    let id: Int;
     let time: Int?;
     let title: String?;
     let url: String?;
@@ -68,7 +68,7 @@ extension Story : Decodable
     {
         
         let val = curry(Story.init)
-            <^> json <|? "id"
+            <^> json <| "id"
             <*> json <|? "time"
             <*> json <|? "title"
             <*> json <|? "url"
