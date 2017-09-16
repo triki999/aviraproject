@@ -38,11 +38,15 @@ class StoriesListViewController: UIViewController, UITableViewDelegate, UITableV
         tableView.sectionHeaderHeight = UITableViewAutomaticDimension;
         
         
-        modelview.getAllStoriesIDS()
-            .observe(on: UIScheduler())
-            .doNext {[weak self] (_) in
+        
+        
+        let appearSignal = self.reactive.signal(for: #selector(UIViewController.viewWillAppear(_:)))
+        
+        appearSignal.flatMap(.latest) {[weak self] (_) in
+            return self?.modelview.getAllStoriesIDS().observe(on: UIScheduler()) ?? SignalProducer.empty
+            }.doNext {[weak self] (_) in
                 self?.tableView.reloadData()
-            }.startWithCompleted {
+            }.observeCompleted {
                 
         }
         

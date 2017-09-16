@@ -30,6 +30,7 @@ class ReadLaterViewModel
     
     func getAllReadLaterStories() -> SignalProducer<Bool,WebErrors>
     {
+        stories = nil;
         let signal = model.getAllReadLaterStories().doNext {[weak self] (stories) in
             self?.stories = stories;
         }.flatMap(.latest) { (_) -> SignalProducer<Bool,WebErrors> in
@@ -38,12 +39,15 @@ class ReadLaterViewModel
         
         return signal;
     }
-//
-//
-//    
-//    func getStorySignal(index:IndexPath) ->SignalProducer<DBStory, WebErrors>
-//    {
-//        
-//    }
+
+
+    
+    func getStorySignal(index:IndexPath) ->SignalProducer<DBStory, WebErrors>
+    {
+        guard let story = stories?[index.row] else {
+            return SignalProducer.empty
+        }
+        return SignalProducer(value:story)
+    }
 
 }

@@ -14,7 +14,7 @@ import Result
 
 fileprivate let cellIdentifier = "cell"
 
-class ReadLaterViewController : UIViewController
+class ReadLaterViewController : UIViewController, UITableViewDelegate, UITableViewDataSource
 {
     @IBOutlet weak var tableView: UITableView!
     let modelView = ReadLaterViewModel()
@@ -23,10 +23,14 @@ class ReadLaterViewController : UIViewController
         
         tableView.estimatedRowHeight = 70;
         tableView.rowHeight = UITableViewAutomaticDimension
-
-        modelView.getAllReadLaterStories().doNext {[weak self] (_) in
+        
+        let appearSignal = self.reactive.signal(for: #selector(UIViewController.viewWillAppear(_:)))
+        
+        appearSignal.flatMap(.latest) {[weak self] (_) in
+            return self?.modelView.getAllReadLaterStories() ?? SignalProducer.empty
+        }.doNext {[weak self] (_) in
             self?.tableView.reloadData()
-            }.startWithCompleted {
+            }.observeCompleted {
                 
         }
         
@@ -36,9 +40,10 @@ class ReadLaterViewController : UIViewController
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as! StoryDetailCell
-//        cell.setCellIndexPath(indexPath, modelView: modelview).startWithCompleted {
-//            
-//        }
+        
+        cell.storyAtIndexPath(indexPath, modelView: modelView).startWithCompleted {
+            
+        }
         
         return cell;
     }
@@ -51,38 +56,33 @@ class ReadLaterViewController : UIViewController
         }
         
         
-//        modelview.getStorySignal(index: indexPath)
-//            .take(until: interuptSignal)
-//            .take(during: self.reactive.lifetime).doNext {[weak self] (dbStory) in
-//                print(dbStory)
-//                
-//                guard let controller = self?.storyboard?.instantiateViewController(withIdentifier: "StoryWebviewController") as? StoryWebviewController else {
-//                    return
-//                }
-//                controller.dbStoryData = dbStory;
-//                
-//                self?.navigationController?.pushViewController(controller, animated: true)
-//                
-//            }.startWithCompleted {
-//                
-//        }
+        
+        modelView.getStorySignal(index: indexPath)
+            .take(until: interuptSignal)
+            .take(during: self.reactive.lifetime).doNext {[weak self] (dbStory) in
+                print(dbStory)
+                
+                guard let controller = self?.storyboard?.instantiateViewController(withIdentifier: "StoryWebviewController") as? StoryWebviewController else {
+                    return
+                }
+                controller.dbStoryData = dbStory;
+                
+                self?.navigationController?.pushViewController(controller, animated: true)
+                
+            }.startWithCompleted {
+                
+        }
     }
     
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
+
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let countNew = modelview.stories?.count else {
+        guard let count = modelView.stories?.count else {
             return 0
         }
         
-        if section == 0{
-            return countNew
-        }
         
-        return countTop;
+        return count;
     }
     
     
