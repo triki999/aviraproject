@@ -22,15 +22,32 @@ class StoriesListViewModel : NSObject
         return Lifetime(token)
     }
     
+    func getLocalStoriesIDS() -> SignalProducer<Bool,WebErrors>
+    {
+        let returnSignal = model.getLocalStoriesIDS().take(during: lifetime)
+            .doNext {[weak self] (newStories,topStories) in
+                self?.topStoriesListIDS = topStories
+                self?.newStoriesListIDS = newStories
+                
+                
+            }.flatMap(.latest) { (_,_) ->SignalProducer<Bool,WebErrors> in
+                SignalProducer(value:true)
+        }
+        
+        return returnSignal
+    }
+    
     func getAllStoriesIDS() -> SignalProducer<Bool,WebErrors>
     {
         let returnSignal = model.getAllStoriesIDS()
             .take(during: lifetime)
-            .doNext {[unowned self] (newStories,topStories) in
-            self.topStoriesListIDS = topStories
-            self.newStoriesListIDS = newStories
-        }.flatMap(.latest) { (_,_) ->SignalProducer<Bool,WebErrors> in
-            SignalProducer(value:true)
+            .doNext {[weak self] (newStories,topStories) in
+                self?.topStoriesListIDS = topStories
+                self?.newStoriesListIDS = newStories
+                
+                
+            }.flatMap(.latest) { (_,_) ->SignalProducer<Bool,WebErrors> in
+                SignalProducer(value:true)
         }
         
         return returnSignal

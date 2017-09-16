@@ -28,13 +28,48 @@ class StorieModel
     
     private init()
     {
+ 
+    }
+    
+    public func getLocalStoriesIDS() ->  SignalProducer<(StoriesList,StoriesList),NoError>
+    {
+        let instance = DBTopAndNewStories.getInstance()
         
-        //getAllStories
-        getAllStoriesIDS().startWithCompleted {[weak self] in
+        
+        let top = transformToStoryList(instance.top)
+        let new = transformToStoryList(instance.new)
 
+        self.topStoriesListIDS = top
+        self.newStoriesListIDS = new
+        
+        
+        return SignalProducer(value:(new,top))
+    }
+    
+    private func transformToStoryList(_ list:List<IntObject>) -> StoriesList
+    {
+        var array:[Int] = []
+        for element in list{
+            array.append(element.value)
         }
         
+        return StoriesList(ids: array)
     }
+    
+    private func createListFrom(_ list:StoriesList ) -> List<IntObject>
+    {
+        let array = List<IntObject>()
+        for element in list.ids{
+            
+            let obj = IntObject()
+            obj.value = element
+            array.append(obj)
+        }
+        
+        return array
+    }
+    
+    
     
     public func getAllReadLaterStories() -> SignalProducer<[DBStory],NoError>
     {
@@ -105,21 +140,21 @@ class StorieModel
     public func getAllStoriesIDS() -> SignalProducer<(StoriesList,StoriesList),WebErrors>
     {
         
-        if let _ = topStoriesListIDS, let _ = newStoriesListIDS {
-            return SignalProducer(value:(newStoriesListIDS!,topStoriesListIDS!))
-        }
+      
         
         let newStoryListSignal = HelperServices.getNewStories()
         let topStoryListSignal = HelperServices.getTopStories()
         
         
         let returnSignal = SignalProducer.combineLatest(newStoryListSignal, topStoryListSignal)
-            .flatMap(.latest) {[weak self] (newStories,topStories) -> SignalProducer<(StoriesList,StoriesList),WebErrors> in
-                guard let wSelf = self else {
-                    return SignalProducer.empty
+            .flatMap(.latest) { (newStories,topStories) -> SignalProducer<(StoriesList,StoriesList),WebErrors> in
+                self.topStoriesListIDS = topStories
+                self.newStoriesListIDS = newStories
+                let instance = DBTopAndNewStories.getInstance()
+                instance.update {
+                    instance.top = self.createListFrom(topStories);
+                    instance.new = self.createListFrom(newStories);
                 }
-                wSelf.topStoriesListIDS = topStories;
-                wSelf.newStoriesListIDS = newStories
                 
                 return SignalProducer(value:(newStories,topStories))
         }
@@ -137,22 +172,19 @@ class StorieModel
         let topStoriesSignal = getStoriesDetailList(type: .top)
         
         let returnSignal = SignalProducer.combineLatest(newStoriesSignal, topStoriesSignal)
-            .flatMap(.latest) {[weak self] (newStories, topStories) -> SignalProducer<([DBStory],[DBStory]),WebErrors> in
-                guard let wSelf = self else {
-                    return SignalProducer.empty
-                }
+            .flatMap(.latest) {(newStories, topStories) -> SignalProducer<([DBStory],[DBStory]),WebErrors> in
+              
                 
-                
-                let newS = wSelf.fillDbWithStories(stories: newStories);
-                let topS = wSelf.fillDbWithStories(stories: topStories);
+                let newS = self.fillDbWithStories(stories: newStories);
+                let topS = self.fillDbWithStories(stories: topStories);
                 
                 return SignalProducer(value:(newS,topS))
                 
                 
                 
-            }.doNext {[weak self] (newStories,topStories) in
-                self?.newStoriesList =  newStories
-                self?.topStoriesList = topStories;
+            }.doNext { (newStories,topStories) in
+                self.newStoriesList =  newStories
+                self.topStoriesList = topStories;
                 
         }
         

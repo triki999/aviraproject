@@ -38,14 +38,34 @@ class StoriesListViewController: UIViewController, UITableViewDelegate, UITableV
         tableView.sectionHeaderHeight = UITableViewAutomaticDimension;
         
         
+        self.edgesForExtendedLayout = .all
         
         
-        let appearSignal = self.reactive.signal(for: #selector(UIViewController.viewWillAppear(_:)))
         
+        let appearSignal = self.reactive.signal(for: #selector(UIViewController.viewWillAppear(_:))).take(during: self.reactive.lifetime)
         appearSignal.flatMap(.latest) {[weak self] (_) in
             return self?.modelview.getAllStoriesIDS().observe(on: UIScheduler()) ?? SignalProducer.empty
             }.doNext {[weak self] (_) in
                 self?.tableView.reloadData()
+            }.observeCompleted {
+                
+        }
+        
+        self.modelview.getLocalStoriesIDS()
+            .observe(on: UIScheduler())
+            .take(during: self.reactive.lifetime).doNext {[weak self] (_) in
+             self?.tableView.reloadData()
+            }.startWithCompleted {
+                
+        }
+        
+        btnNewAndTopStories.reactive.controlEvents(.touchUpInside)
+            .take(during: self.reactive.lifetime)
+            .flatMap(.latest) {[weak self] (_) in
+                return self?.modelview.getAllStoriesIDS().observe(on: UIScheduler()) ?? SignalProducer.empty
+            }.doNext {[weak self] (_) in
+                self?.tableView.reloadData()
+                self?.tableView.scrollToRow(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
             }.observeCompleted {
                 
         }
@@ -81,10 +101,10 @@ class StoriesListViewController: UIViewController, UITableViewDelegate, UITableV
         
         let interuptSignal = self.reactive.signal(for: #selector(UITableViewDelegate.tableView(_:didSelectRowAt:)))
             .flatMap(.latest) { (_) -> SignalProducer<(),NoError> in
-            SignalProducer.empty;
+                SignalProducer.empty;
         }
         
-
+        
         modelview.getStorySignal(index: indexPath)
             .take(until: interuptSignal)
             .take(during: self.reactive.lifetime).doNext {[weak self] (dbStory) in
@@ -96,7 +116,7 @@ class StoriesListViewController: UIViewController, UITableViewDelegate, UITableV
                 controller.dbStoryData = dbStory;
                 
                 self?.navigationController?.pushViewController(controller, animated: true)
-            
+                
             }.startWithCompleted {
                 
         }

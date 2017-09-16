@@ -65,4 +65,25 @@ public class DBStory : RealmUpdater
     }
     
 }
+class IntObject: Object {
+    dynamic var value = -1
+}
+
+public class DBTopAndNewStories : RealmUpdater
+{
+    var top = List<IntObject>()
+    var new = List<IntObject>()
+    
+    static func getInstance() -> DBTopAndNewStories{
+        
+        let realm =  try! Realm();
+        guard let obj = realm.objects(DBTopAndNewStories.self).first else {
+            let instance = DBTopAndNewStories()
+            instance.addToRealm()
+            return instance
+        }
+        
+        return obj;
+    }
+}
 
